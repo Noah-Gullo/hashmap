@@ -36,5 +36,5 @@ test("Update value if key already exists", () => {
 test("Set with non string keys", () => {
     const hm = new HashMap();
     expect(() => {hm.set(0.5, 0)}).toThrow();
-    
+    expect(() => {hm.set(11223, "string")}).toThrow();
 })
