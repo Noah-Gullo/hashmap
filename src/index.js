@@ -115,7 +115,17 @@ export class HashMap{
     }
 
     length(){
+        let len = 0;
 
+        for(let i = 0; i < this.capacity; i++){
+            let ll = this.array[i].list;
+            while(ll != null){
+                len++;
+                ll = ll.nextNode;
+            }
+        }
+
+        return len;
     }
 
     clear(){
@@ -185,6 +195,8 @@ hm.set("a", 1);
 hm.set("Q", 2);
 hm.set("!", 3);
 hm.set("1", 4);
+console.log(hm.length())
 hm.remove("!");
+console.log(hm.length());
 hm.remove("Q");
-console.log(hm.array[hm.hash("A")].list);
+console.log(hm.length());

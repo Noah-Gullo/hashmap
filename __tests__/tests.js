@@ -170,3 +170,33 @@ test("Remove middle element", () => {
     hm.remove("Q");
     expect(hm.array[hm.hash("A")].list).toMatchObject(new Node("A", 0, new Node("a", 1, new Node("!", 3, new Node("1", 4, null)))));
 })
+
+
+test("Length 0", () => {
+    const hm = new HashMap();
+    expect(hm.length()).toBe(0);
+})
+
+test("Length > 0", () => {
+    const hm = new HashMap();
+    hm.set("Test", 1);
+    hm.set("Best", 2);
+    hm.set("Crest", 3);
+    expect(hm.length()).toBe(3);
+
+    const hm2 = new HashMap();
+    hm2.set("A", 1);
+    hm2.set("B", 50);
+    hm2.set("C", 100);
+    hm2.set("D", 62);
+    hm2.set("E", 12);
+    expect(hm2.length()).toBe(5);
+    hm2.remove("A");
+    expect(hm2.length()).toBe(4);
+    hm2.remove("B");
+    hm2.remove("D")
+    expect(hm2.length()).toBe(2);
+    hm2.remove("C");
+    hm2.remove("E");
+    expect(hm2.length()).toBe(0);
+})
