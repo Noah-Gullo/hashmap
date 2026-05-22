@@ -50,8 +50,15 @@ export class HashMap{
         }
     }
 
-    remove(key){
+    has(key){
+        for(let i = 0; i < this.capacity; i++){
+            let ll = this.array[i];
+            if(ll.contains(key) != false){
+                return true;
+            }
+        }
 
+        return false;
     }
 
     length(){
