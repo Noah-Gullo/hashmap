@@ -133,7 +133,10 @@ export class HashMap{
     }
 
     clear(){
-
+        const keyArray = this.keys();
+        for(let i = 0; i < keyArray.length; i++){
+            this.remove(keyArray[i]);
+        }
     }
 
     keys(){
