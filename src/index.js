@@ -9,6 +9,7 @@ export class HashMap{
     }
     
     hash(key){
+        if (key.length < 0) return "Invalid key length";
         let hashCode = 0;
         const primeNumber = 31;
 
@@ -20,7 +21,9 @@ export class HashMap{
     }
 
     set(key, value){
-        if(!key instanceof String) throw TypeError("Key must be a string.");
+        if(typeof key != 'string') {
+            throw TypeError("Key must be a string.")
+        };
 
         let index = this.hash(key);
         let ll = this.array[index];
@@ -41,6 +44,11 @@ export class HashMap{
     }
 
     get(key){
+
+        if(typeof key != 'string') {
+            throw TypeError("Key must be a string.")
+        };
+
         let index = this.hash(key);
         const ll = this.array[index].list;
         if(index < 0 || index >= this.capacity){
@@ -51,6 +59,11 @@ export class HashMap{
     }
 
     has(key){
+        
+        if(typeof key != 'string') {
+            throw TypeError("Key must be a string.")
+        };
+
         for(let i = 0; i < this.capacity; i++){
             let ll = this.array[i];
             if(ll.contains(key) != false){
