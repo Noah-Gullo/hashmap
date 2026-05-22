@@ -27,7 +27,15 @@ export class HashMap{
         if(!ll.contains(key)){
             ll.append(key, value);
         }else{
-            console.log(key + "already exists with value: " + ll.contains(key));
+            let copy = this.array[index].list;
+            while(copy != null){
+                if(copy.key == key){
+                    copy.value = value;
+                    break;
+                }
+                copy = copy.nextNode
+            }
+            this.array[index].list = copy;
         }
 
     }
@@ -38,7 +46,7 @@ export class HashMap{
         if(index < 0 || index >= this.capacity){
             return false;
         }else{
-            return ll.contains(key);
+            return ll.contains(key).value;
         }
     }
 
@@ -90,7 +98,7 @@ class LinkedList{
         let copy = this.list;
         while(copy != null){
             if(copy.key === key){
-                return copy.value; 
+                return new Node(copy.key, copy.value, null); 
             }
             copy = copy.nextNode;
         }
@@ -112,6 +120,8 @@ export class Node{
 }
 
 const hm = new HashMap();
-hm.set("test", 1);
-hm.set("test", 2);
+hm.set("test", "Old value");
+hm.set("test", "New value");
+hm.set("key", "Second key value");
+hm.set("test", "Newest value");
 console.log(hm);
