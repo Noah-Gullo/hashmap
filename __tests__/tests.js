@@ -264,3 +264,34 @@ test("Return keys in an array", () => {
     hm2.set("K", 10);
     expect(hm2.keys().sort()).toMatchObject(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"].sort());
 })
+
+test("Return values in an array", () => {
+    const hm = new HashMap();
+    hm.set("Key", 0);
+    hm.set("fits", 2);
+    hm.set("in", 0);
+    hm.set("a", 0);
+    hm.set("lock.", 12);
+    expect(hm.values().sort()).toMatchObject([0, 2, 12].sort());
+
+    const hm2 = new HashMap();
+    hm2.set("A", 0);
+    hm2.set("B", 1);
+    hm2.set("C", 2);
+    hm2.set("D", 3);
+    hm2.set("E", 4);
+    hm2.set("F", 5);
+    hm2.set("G", 6);
+    hm2.set("H", 7);
+    hm2.set("I", 8);
+    hm2.set("J", 9);
+    hm2.set("K", 10);
+    expect(hm2.values().sort()).toMatchObject([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].sort());
+
+    const hm3 = new HashMap();
+    hm3.set("Tom", "Jerry");
+    hm3.set("Ronald", "McDonald");
+    hm3.set("Tom", "Cruise");
+    hm3.set("Test", "Best");
+    expect(hm3.values().sort()).toMatchObject(["McDonald", "Best", "Cruise"].sort());
+})

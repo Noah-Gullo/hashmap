@@ -154,7 +154,19 @@ export class HashMap{
     }
 
     values(){
+        let values = [];
 
+        for(let i = 0; i < this.capacity; i++){
+            let ll = this.array[i].list;
+            while(ll != null){
+                if(values.includes(ll.value) == false){
+                    values.push(ll.value);
+                }
+                ll = ll.nextNode;
+            }
+        }
+
+        return values;
     }
 
     entries(){
