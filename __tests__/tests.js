@@ -64,3 +64,25 @@ test("Correct value of get for existant keys", () => {
     expect(hm2.get("Y")).toBe(30);
     expect(hm2.get("y")).toBe(29);
 })
+
+test("Returns false if a key is not in the HashMap", () => {
+    const hm = new HashMap();
+    hm.set("Hello", 0);
+    hm.set("Goodbye", 0);
+    hm.set("Good morning", 0);
+
+    expect(hm.has("Key1")).toBe(false);
+    expect(hm.has("Non-existance")).toBe(false);
+    expect(hm.has("Performant sorting")).toBe(false);
+})
+
+test("Returns true if a key is in the HashMap", () => {
+    const hm = new HashMap();
+    hm.set("Hello", 0);
+    hm.set("Goodbye", 0);
+    hm.set("Good morning", 0);
+
+    expect(hm.has("Hello")).toBe(true);
+    expect(hm.has("Goodbye")).toBe(true);
+    expect(hm.has("Good morning")).toBe(true);
+})
