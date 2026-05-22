@@ -137,7 +137,17 @@ export class HashMap{
     }
 
     keys(){
+        let keys = [];
 
+        for(let i = 0; i < this.capacity; i++){
+            let ll = this.array[i].list;
+            while(ll != null){
+                keys.push(ll.key);
+                ll = ll.nextNode;
+            }
+        }
+
+        return keys;
     }
 
     values(){
@@ -192,15 +202,3 @@ export class Node{
         this.nextNode = nextNode;
     }
 }
-
-const hm = new HashMap();
-hm.set("A", 0);
-hm.set("a", 1);
-hm.set("Q", 2);
-hm.set("!", 3);
-hm.set("1", 4);
-console.log(hm.length())
-hm.remove("!");
-console.log(hm.length());
-hm.remove("Q");
-console.log(hm.length());

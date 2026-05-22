@@ -222,3 +222,27 @@ test("Length > 0", () => {
     hm2.remove("E");
     expect(hm2.length()).toBe(0);
 })
+
+test("Return keys in an array", () => {
+    const hm = new HashMap();
+    hm.set("Key", 0);
+    hm.set("fits", 2);
+    hm.set("in", 0);
+    hm.set("a", 0);
+    hm.set("lock.", 12);
+    expect(hm.keys().sort()).toMatchObject(["Key", "fits", "in", "a", "lock."].sort());
+
+    const hm2 = new HashMap();
+    hm2.set("A", 0);
+    hm2.set("B", 1);
+    hm2.set("C", 2);
+    hm2.set("D", 3);
+    hm2.set("E", 4);
+    hm2.set("F", 5);
+    hm2.set("G", 6);
+    hm2.set("H", 7);
+    hm2.set("I", 8);
+    hm2.set("J", 9);
+    hm2.set("K", 10);
+    expect(hm2.keys().sort()).toMatchObject(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"].sort());
+})
