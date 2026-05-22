@@ -81,6 +81,23 @@ export class HashMap{
         return false;
     }
 
+    remove(key){
+        if(!this.has(key)){
+            return false;
+        }else{
+            let index = this.hash(key);
+            let ll = this.array[index].list;
+
+            while(ll === null){
+                if(ll.key === key){
+                    return true;
+                }
+                
+                ll = ll.nextNode;
+            }
+        }
+    }
+
     length(){
 
     }
@@ -147,7 +164,8 @@ export class Node{
 }
 
 const hm = new HashMap();
-hm.set("X", 4);
-hm.set("Y", 30);
-hm.set("y", 29);
-console.log(hm);
+hm.set("A", "1");
+hm.set("B", "2");
+hm.set("C", "3");
+hm.set("D", "4");
+console.log(hm.remove("C"));

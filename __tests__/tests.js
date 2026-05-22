@@ -65,6 +65,16 @@ test("Correct value of get for existant keys", () => {
     expect(hm2.get("y")).toBe(29);
 })
 
+test("Get for both existant and non-existant keys", () => {
+    const hm = new HashMap();
+    hm.set("The quick", "brown fox");
+    hm.set("jumped over", "the lazy dog");
+    expect(hm.get("The quick")).toBe("brown fox");
+    expect(hm.get("jumped over")).toBe("the lazy dog");
+    expect(hm.get("not a key in the HashMap")).toBe(false);
+    expect(hm.get("another false case")).toBe(false);
+})
+
 test("Returns false if a key is not in the HashMap", () => {
     const hm = new HashMap();
     hm.set("Hello", 0);
@@ -85,4 +95,39 @@ test("Returns true if a key is in the HashMap", () => {
     expect(hm.has("Hello")).toBe(true);
     expect(hm.has("Goodbye")).toBe(true);
     expect(hm.has("Good morning")).toBe(true);
+})
+
+test("Testing has() for both true and false mixed", () => {
+    const hm = new HashMap();
+    hm.set("Testing", "testing testing 123");
+    hm.set("The Raven", "Once upon a midnight dreary");
+    hm.set("Oppenheimer", "And so I have become death");
+
+    expect(hm.has("Testing")).toBe(true);
+    expect(hm.has("AFJDLKAJFLKDMAKLVMELAKVm")).toBe(false);
+    expect(hm.has("The Raven")).toBe(true);
+    expect(hm.has("Oppenheimer")).toBe(true);
+    expect(hm.has("What")).toBe(false);
+    expect(hm.has("VERY COOL KEY")).toBe(false);
+})
+
+test("Remove with invalid keys should return false", () => {
+    const hm = new HashMap();
+    hm.set("Populate", "So not empty");
+    expect(hm.remove("WOW THIS IS A REAL KEY")).toBe(false);
+    expect(hm.remove("I'M GOING TO TAKE THIS GOLD KEY TO THE KEY SHOP")).toBe(false);
+    expect(hm.remove("OH NO I BROKE MY LEG")).toBe(false);
+})
+
+test("Remove with valid key should remove the key and return true", () => {
+    const hm = new HashMap();
+    const indices = [hm.hash("A"), hm.hash("B"), hm.hash("C"), hm.hash("D")];
+    hm.set("A", "1");
+    hm.set("B", "2");
+    hm.set("C", "3");
+    hm.set("D", "4");
+
+    expect(hm.array[indices[0]].list).toMatchObject(new Node("A", "1", null));
+    expect(hm.remove("C")).toBe(true);
+    expect(hm.array[indices[0]].list).toBe(null);
 })
