@@ -54,10 +54,11 @@ test("Rehashes table correctly if load factor is overgrown", () => {
     hm.set("I", 8);
     hm.set("J", 9);
     hm.set("K", 10);
-    expect(hm.length()).toBe(11);
-    expect(hm.capacity).toBe(16);
     hm.set("L", 11);
     expect(hm.length()).toBe(12);
+    expect(hm.capacity).toBe(16);
+    hm.set("M", 12);
+    expect(hm.length()).toBe(13);
     expect(hm.capacity).toBe(32);
 })
 

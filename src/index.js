@@ -46,7 +46,7 @@ export class HashMap{
         if(!ll.contains(key)){
             this.count++;
             ll.append(key, value);
-            if(this.count >= this.capacity * this.loadFactor){
+            if(this.count > this.capacity * this.loadFactor){
                 this.#rehash();
             }
         }else{
@@ -237,22 +237,3 @@ export class Node{
         this.nextNode = nextNode;
     }
 }
-
-const hm = new HashMap();
-hm.set("A", 0);
-hm.set("B", 1);
-hm.set("C", 2);
-hm.set("D", 3);
-
-hm.set("E", 4);
-hm.set("F", 5);
-hm.set("G", 6);
-hm.set("H", 7);
-
-hm.set("I", 8);
-hm.set("J", 9);
-hm.set("K", 10);
-hm.set("L", 11);
-
-console.log(hm);
-console.log(hm.entries());
