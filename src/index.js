@@ -3,6 +3,8 @@ export class HashMap{
         this.array = [];
         this.loadFactor = 0.75;
         this.capacity = 16;
+        this.count = 0;
+
         for(let i = 0; i < this.capacity; i++){
             this.array[i] = new LinkedList();
         }
@@ -20,6 +22,13 @@ export class HashMap{
         return hashCode;
     }
 
+    #rehash(){
+        this.capacity = this.capacity * 2;
+        for(let i = 0; i < this.capacity; i++){
+            this.array[i] = new LinkedList();
+        }
+    }
+
     set(key, value){
         if(typeof key != 'string') {
             throw TypeError("Key must be a string.")
@@ -28,7 +37,11 @@ export class HashMap{
         let index = this.hash(key);
         let ll = this.array[index];
         if(!ll.contains(key)){
+            this.count++;
             ll.append(key, value);
+            if(this.count >= this.capacity * this.loadFactor){
+                this.#rehash();
+            }
         }else{
             let copy = this.array[index].list;
             while(copy != null){
@@ -85,6 +98,7 @@ export class HashMap{
         if(!this.has(key)){
             return false;
         }else{
+            this.count--;
             let index = this.hash(key);
             let ll = this.array[index].list;
             let newLL = new LinkedList();
@@ -115,17 +129,7 @@ export class HashMap{
     }
 
     length(){
-        let len = 0;
-
-        for(let i = 0; i < this.capacity; i++){
-            let ll = this.array[i].list;
-            while(ll != null){
-                len++;
-                ll = ll.nextNode;
-            }
-        }
-
-        return len;
+        return this.count;
     }
 
     clear(){
