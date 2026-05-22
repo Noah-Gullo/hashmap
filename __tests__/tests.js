@@ -121,13 +121,11 @@ test("Remove with invalid keys should return false", () => {
 
 test("Remove with valid key should remove the key and return true", () => {
     const hm = new HashMap();
-    const indices = [hm.hash("A"), hm.hash("B"), hm.hash("C"), hm.hash("D")];
+    /* All of these hash to same index;*/
     hm.set("A", "1");
-    hm.set("B", "2");
-    hm.set("C", "3");
-    hm.set("D", "4");
-
-    expect(hm.array[indices[0]].list).toMatchObject(new Node("A", "1", null));
-    expect(hm.remove("C")).toBe(true);
-    expect(hm.array[indices[0]].list).toBe(null);
+    hm.set("Q", "5");
+    hm.set("1", "6");
+    expect(hm.array[hm.hash("A")].list).toMatchObject(new Node("A", "1", new Node("Q", "5", new Node("1", "6", null))));
+    hm.remove("Q");
+    expect(hm.array[hm.hash("A")].list).toMatchObject(new Node("A", "1", new Node("1", "6", null)));
 })

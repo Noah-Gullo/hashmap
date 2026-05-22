@@ -87,14 +87,21 @@ export class HashMap{
         }else{
             let index = this.hash(key);
             let ll = this.array[index].list;
+            let newLL = new LinkedList();
 
-            while(ll === null){
+            while(ll.nextNode != null){
                 if(ll.key === key){
+                    newLL.list.nextNode = ll.nextNode;
+                    this.array[index].list = newLL.list;
                     return true;
                 }
-                
+
+                newLL.append(ll.key, ll.value);
                 ll = ll.nextNode;
             }
+
+            this.array[index].list = null;
+            return true;
         }
     }
 
@@ -162,10 +169,3 @@ export class Node{
         this.nextNode = nextNode;
     }
 }
-
-const hm = new HashMap();
-hm.set("A", "1");
-hm.set("B", "2");
-hm.set("C", "3");
-hm.set("D", "4");
-console.log(hm.remove("C"));
