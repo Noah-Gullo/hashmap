@@ -91,8 +91,17 @@ export class HashMap{
 
             while(ll.nextNode != null){
                 if(ll.key === key){
-                    newLL.list.nextNode = ll.nextNode;
-                    this.array[index].list = newLL.list;
+                    if(newLL.list == null){
+                        this.array[index].list = ll.nextNode;
+                    }else{
+                        ll = ll.nextNode;
+                        while(ll != null){
+                            newLL.append(ll.key, ll.value);
+                            ll = ll.nextNode;
+                        }
+                        this.array[index].list = newLL.list;
+                    }
+                    
                     return true;
                 }
 
@@ -100,7 +109,7 @@ export class HashMap{
                 ll = ll.nextNode;
             }
 
-            this.array[index].list = null;
+            this.array[index].list = newLL.list;
             return true;
         }
     }
@@ -169,3 +178,13 @@ export class Node{
         this.nextNode = nextNode;
     }
 }
+
+const hm = new HashMap();
+hm.set("A", 0);
+hm.set("a", 1);
+hm.set("Q", 2);
+hm.set("!", 3);
+hm.set("1", 4);
+hm.remove("!");
+hm.remove("Q");
+console.log(hm.array[hm.hash("A")].list);

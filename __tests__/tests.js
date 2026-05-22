@@ -129,3 +129,44 @@ test("Remove with valid key should remove the key and return true", () => {
     hm.remove("Q");
     expect(hm.array[hm.hash("A")].list).toMatchObject(new Node("A", "1", new Node("1", "6", null)));
 })
+
+test("Remove first element", () => {
+    /* All of these elements has to the same index;*/
+    const hm = new HashMap();
+    hm.set("A", 0);
+    hm.set("a", 1);
+    hm.set("Q", 2);
+    hm.set("!", 3);
+    hm.set("1", 4);
+    expect(hm.array[hm.hash("Q")].list).toMatchObject(new Node("A", 0, new Node("a", 1, new Node("Q", 2, new Node("!", 3, new Node("1", 4, null))))));
+    hm.remove("A");
+    expect(hm.array[hm.hash("Q")].list).toMatchObject(new Node("a", 1, new Node("Q", 2, new Node("!", 3, new Node("1", 4, null)))));
+})
+
+
+test("Remove last element", () => {
+    /* All of these elements has to the same index;*/
+    const hm = new HashMap();
+    hm.set("A", 0);
+    hm.set("a", 1);
+    hm.set("Q", 2);
+    hm.set("!", 3);
+    hm.set("1", 4);
+    expect(hm.array[hm.hash("Q")].list).toMatchObject(new Node("A", 0, new Node("a", 1, new Node("Q", 2, new Node("!", 3, new Node("1", 4, null))))));
+    hm.remove("1");
+    expect(hm.array[hm.hash("Q")].list).toMatchObject(new Node("A", 0, new Node("a", 1, new Node("Q", 2, new Node("!", 3, null)))));
+})
+
+
+test("Remove middle element", () => {
+    /* All of these elements has to the same index;*/
+    const hm = new HashMap();
+    hm.set("A", 0);
+    hm.set("a", 1);
+    hm.set("Q", 2);
+    hm.set("!", 3);
+    hm.set("1", 4);
+    expect(hm.array[hm.hash("A")].list).toMatchObject(new Node("A", 0, new Node("a", 1, new Node("Q", 2, new Node("!", 3, new Node("1", 4, null))))));
+    hm.remove("Q");
+    expect(hm.array[hm.hash("A")].list).toMatchObject(new Node("A", 0, new Node("a", 1, new Node("!", 3, new Node("1", 4, null)))));
+})
