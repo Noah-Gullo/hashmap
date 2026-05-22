@@ -44,22 +44,29 @@ export class HashMap{
     }
 
     get(key){
-
         if(typeof key != 'string') {
             throw TypeError("Key must be a string.")
         };
 
         let index = this.hash(key);
-        const ll = this.array[index].list;
         if(index < 0 || index >= this.capacity){
             return false;
         }else{
-            return ll.contains(key).value;
+            for(let i = 0; i < this.capacity; i++){
+                let ll = this.array[i].list;
+                while(ll != null){
+                    if(ll.key === key){
+                        return ll.value;
+                    }
+                    ll = ll.nextNode;
+                }
+            }
+
+            return false;
         }
     }
 
     has(key){
-        
         if(typeof key != 'string') {
             throw TypeError("Key must be a string.")
         };
@@ -110,7 +117,7 @@ class LinkedList{
                 copy = copy.nextNode;
             }
 
-            copy.nextNode = new Node(value, null);
+            copy.nextNode = new Node(key, value, null);
         }
     }
 
@@ -140,8 +147,7 @@ export class Node{
 }
 
 const hm = new HashMap();
-hm.set("test", "Old value");
-hm.set("test", "New value");
-hm.set("key", "Second key value");
-hm.set("test", "Newest value");
+hm.set("X", 4);
+hm.set("Y", 30);
+hm.set("y", 29);
 console.log(hm);

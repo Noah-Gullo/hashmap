@@ -38,3 +38,29 @@ test("Set with non string keys", () => {
     expect(() => {hm.set(0.5, 0)}).toThrow();
     expect(() => {hm.set(11223, "string")}).toThrow();
 })
+
+test("Get with non-existant keys", () => {
+    const hm = new HashMap();
+    hm.set("test", "hi");
+    expect(hm.get("a")).toBe(false);
+    expect(hm.get("b")).toBe(false);
+    expect(hm.get("1234")).toBe(false);
+})
+
+test("Correct value of get for existant keys", () => {
+    const hm = new HashMap();
+    hm.set("hello", "World");
+    hm.set("Can you hear me", "Adele");
+    hm.set("John", "Brown");
+    expect(hm.get("hello")).toBe("World");
+    expect(hm.get("Can you hear me")).toBe("Adele");
+    expect(hm.get("John")).toBe("Brown");
+
+    const hm2 = new HashMap();
+    hm2.set("X", 4);
+    hm2.set("Y", 30);
+    hm2.set("y", 29);
+    expect(hm2.get("X")).toBe(4);
+    expect(hm2.get("Y")).toBe(30);
+    expect(hm2.get("y")).toBe(29);
+})
