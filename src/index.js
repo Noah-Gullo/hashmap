@@ -23,9 +23,16 @@ export class HashMap{
     }
 
     #rehash(){
+        let entries = this.entries();
+
         this.capacity = this.capacity * 2;
+        this.count = 0;
         for(let i = 0; i < this.capacity; i++){
             this.array[i] = new LinkedList();
+        }
+    
+        for(let i = 0; i < entries.length; i++){
+            this.set(entries[i][0], entries[i][1]);
         }
     }
 
@@ -230,3 +237,22 @@ export class Node{
         this.nextNode = nextNode;
     }
 }
+
+const hm = new HashMap();
+hm.set("A", 0);
+hm.set("B", 1);
+hm.set("C", 2);
+hm.set("D", 3);
+
+hm.set("E", 4);
+hm.set("F", 5);
+hm.set("G", 6);
+hm.set("H", 7);
+
+hm.set("I", 8);
+hm.set("J", 9);
+hm.set("K", 10);
+hm.set("L", 11);
+
+console.log(hm);
+console.log(hm.entries());
