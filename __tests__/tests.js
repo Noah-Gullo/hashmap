@@ -295,3 +295,24 @@ test("Return values in an array", () => {
     hm3.set("Test", "Best");
     expect(hm3.values().sort()).toMatchObject(["McDonald", "Best", "Cruise"].sort());
 })
+
+test("Return all entries in array", () => {
+    const hm = new HashMap();
+    hm.set("Mine", "Craft");
+    hm.set("Hollow", "Knight");
+    hm.set("Silk", "Song");
+    expect(hm.entries().sort()).toMatchObject([["Mine", "Craft"], ["Hollow", "Knight"], ["Silk", "Song"]].sort());
+
+    const hm2 = new HashMap();
+    hm2.set("A", 0);
+    hm2.set("B", 1);
+    hm2.set("C", 2);
+    hm2.set("D", 3);
+    expect(hm2.entries().sort()).toMatchObject([["A", 0], ["B", 1], ["C", 2], ["D", 3]].sort());
+
+    const hm3 = new HashMap();
+    hm3.set("Birds of a feather", "we should stick");
+    hm3.set("I used to rule", "the world.");
+    hm3.set("Another love another love", "all my tears would be used up");
+    expect(hm3.entries().sort()).toMatchObject([["Birds of a feather", "we should stick"], ["I used to rule", "the world."], ["Another love another love", "all my tears would be used up"]].sort());
+})

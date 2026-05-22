@@ -170,7 +170,20 @@ export class HashMap{
     }
 
     entries(){
+        let entries = [];
 
+        for(let i = 0; i < this.capacity; i++){
+            let ll = this.array[i].list;
+            while(ll != null){
+                let pair = []
+                pair[0] = ll.key;
+                pair[1] = ll.value;
+                entries.push(pair);
+                ll = ll.nextNode;
+            }
+        }
+
+        return entries;
     }
 }
 
